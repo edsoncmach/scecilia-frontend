@@ -1,73 +1,68 @@
-# React + TypeScript + Vite
+# 🎵 S. Cecília App - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este é o repositório do frontend (UI/UX) do projeto S. Cecília. Esta aplicação React consome a API do [S. Cecília Backend](https://github.com/seu-usuario/scecilia-backend) para fornecer uma interface de usuário rica e responsiva.
 
-Currently, two official plugins are available:
+Construído com **React**, **Vite**, **TypeScript** e **TailwindCSS**, este frontend é otimizado para ser um *Progressive Web App* (PWA) rápido, responsivo e funcional tanto em desktops (para gerenciamento) quanto em tablets/celulares (para músicos).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Funcionalidades Principais
 
-## React Compiler
+* **Interface Responsiva (Mobile-First):** Layouts que se adaptam de celular (1 coluna) a desktops (layouts complexos).
+* **Renderização de Cifras:** Um visualizador de cifras customizado (estilo CifraClub) com transposição de tom em tempo real.
+* **Editor de Cifras Inteligente:** Permite ao usuário colar cifras no formato "cifra em cima/letra embaixo".
+* **Gerenciamento de Estado Global:** Uso de `React Context` para gerenciar a autenticação (JWT) e o "Crachá VIP" (contexto) do usuário.
+* **Roteamento Protegido:** Separação clara de rotas públicas (`/login`), rotas de membros (`/cifras`) e rotas de admin (`/admin/usuarios`).
+* **Painéis Dinâmicos:** O Dashboard muda completamente dependendo do cargo do usuário (Admin, Coordenador ou Músico).
+* **Busca Otimizada (Debounce):** O "Montador de Setlist" usa *debounce* para buscar no acervo sem sobrecarregar a API.
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+## Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+* **Framework:** [React](https://react.dev/) (com Hooks e Context)
+* **Build Tool:** [Vite](https://vitejs.dev/)
+* **Linguagem:** [TypeScript](https://www.typescriptlang.org/)
+* **Estilização:** [TailwindCSS](https://tailwindcss.com/)
+* **Roteamento:** [React Router DOM](https://reactrouter.com/)
+* **Cliente HTTP:** [Axios](https://axios-http.com/)
+* **Ícones:** [React Icons](https://react-icons.github.io/react-icons/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🚀 Guia de Instalação (Desenvolvimento)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Siga estes passos para rodar o frontend localmente.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Pré-requisitos
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+* O **[Backend (S. Cecília API)](https://github.com/seu-usuario/scecilia-backend)** *deve* estar instalado e rodando (na porta `3000`).
+* [Node.js](https://nodejs.org/) (v18 ou superior)
+* [npm](https://www.npmjs.com/) ou [yarn](https://yarnpkg.com/)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 1. Instalação do Projeto
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/seu-usuario/scecilia-frontend.git](https://github.com/seu-usuario/scecilia-frontend.git)
+    cd scecilia-frontend
+    ```
+2.  **Instale as dependências:**
+    ```bash
+    npm install
+    ```
+
+### 2. Rodando o App
+
+1.  Certifique-se de que o backend já está rodando em `http://localhost:3000`.
+2.  Inicie o servidor de desenvolvimento do Vite:
+    ```bash
+    npm run dev
+    ```
+3.  O servidor estará rodando em `http://localhost:5173` (ou outra porta, se a 5173 estiver em uso).
+
+### 3. Fluxo de Primeiro Uso
+
+1.  Acesse `http://localhost:5173/`.
+2.  Você será redirecionado para `/login`.
+3.  Use as credenciais do **Admin** criadas pelo *backend* (`admin@scecilia.com` / `admin123`).
+4.  Use o painel do Admin para:
+    * Ir em "Gerenciar Organização" e criar sua primeira Comunidade, Paróquia e Igreja.
+    * Ir em "Gerenciar Usuários" e "Promover" um usuário (que deve se cadastrar via `/register`) para o cargo de `Coordenador`, atrelando-o à Igreja que você criou.
+5.  Faça logout e logue como o novo Coordenador para começar a usar o app.
